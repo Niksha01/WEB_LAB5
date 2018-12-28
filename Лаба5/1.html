@@ -1,0 +1,108 @@
+<html>
+	<head>
+		<meta charset="utf-8"></head>
+	</head>
+	<body>
+		<script>
+			var m = [
+				{
+					text: 'Животные',
+					children: [
+						{
+							text: 'Млекопитающие',
+							children: [
+								{
+									text: 'Коровы',
+									children: []
+								},
+								{						
+									text: 'Ослы',
+									children: []
+								},
+								{
+									text: 'Собаки',
+									children: []
+								},
+								{
+									text: 'Тигры',
+									children: []
+								}
+							]
+						},
+						{
+							text: 'Другие',
+							children: [
+								{						
+									text: 'Змеи',
+									children: []
+								},
+								{
+									text: 'Птицы',
+									children: []
+								},
+								{
+									text: 'Ящерицы',
+									children: []
+								}
+							]
+						}
+					]
+				},
+				{
+					text: 'Рыбы',
+					children: [
+						{
+							text: 'Аквариумные',
+							children: [
+								{
+									text: 'Гуппи',
+									children: []
+								},
+								{
+									text: 'Скалярии',
+									children: []
+								}
+							]
+						},
+						{
+							text: 'Морские',
+							children: [
+								{
+									text: 'Морская форель',
+									children: []
+								}
+							]
+						}	
+					]
+				}
+			];
+			function createElement(a){
+				var li = document.createElement("li");
+				li.innerHTML = a.text;
+				
+				if (a.children.length > 0){
+					var ul = document.createElement("ul");
+					for (var j = 0; j < a.children.length; j++){
+						ul.append(createElement(a.children[j]));
+					}
+					li.append(ul);
+				}
+				
+				return li;
+			}
+			var ul = document.createElement("ul");
+			for (var i = 0; i < m.length; i++){
+				ul.append(createElement(m[i]));
+			}
+			document.body.append(ul)
+			recursion(document);
+			function recursion(element){
+				if (element.childNodes === undefined) return
+				for (let node of element.childNodes) {
+					console.log(node.nodeName, node.nodeType, node.nodeValue)
+					recursion(node)
+				}
+			}
+		</script>
+	</body>
+</html>
